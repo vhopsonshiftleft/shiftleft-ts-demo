@@ -25,9 +25,9 @@ jobs:
       run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
       id: extract_branch
     - name: NextGen Static Analysis
-      run: ${GITHUB_WORKSPACE}/sl analyze --wait --app shiftleft-ts-demo --tag branch=${{ github.head_ref || steps.extract_branch.outputs.branch }} --js --cpg . -- --ts
+      run: set -v ; ${GITHUB_WORKSPACE}/sl analyze --wait --app shiftleft-ts-demo --tag branch=${{ github.head_ref || steps.extract_branch.outputs.branch }} --tag app.group=ShiftLeft --js --cpg . -- --ts
       env:
-        SHIFTLEFT_ACCESS_TOKEN: ${{ secrets.SHIFTLEFT_ACCESS_TOKEN }}
+        SHIFTLEFT_ACCESS_TOKEN: ${{ secrets.SHIFTLEFT_ACCESS_TOKEN2 }}
         
   Build-Rules: 
     runs-on: ubuntu-latest
